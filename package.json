@@ -1,0 +1,27 @@
+{
+  "name": "blog-com-node",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/VictorS357/HTML--CSS--JS-project---shop#readme",
+  "bugs": {
+    "url": "https://github.com/VictorS357/HTML--CSS--JS-project---shop/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VictorS357/HTML--CSS--JS-project---shop.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "ejs": "^5.0.2",
+    "express": "^5.2.1",
+    "mysql2": "^3.22.3",
+    "sequelize": "^6.37.8"
+  }
+}
