@@ -3,6 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/database');
 
+const categoriesController = require('./categories/CategoriesController');
+const articlesController = require('./articles/ArticlesController');
+
 //view engine
 app.set('view engine', 'ejs');
 
@@ -21,6 +24,10 @@ connection
   }).catch(error => {
     console.log(error);
   });
+
+//rotas controller
+app.use('/', categoriesController); //utilizar rotas dentro do arquivo --- esse '/' é um prefixo (nesse caso sem prefixo) --- caso tivesse prefixo, ele seria usado sempre antes da rota princpal
+app.use('/', articlesController);
 
 //rotas
 app.get('/', (req, res) => {
