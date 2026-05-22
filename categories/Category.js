@@ -17,4 +17,9 @@ Slug é basicamente uma versão do título que seria utilizado em uma rota. Ex:
   Slug = desenvolvimento-web
 */
 
+// Category.sync({force: true});
+// essa linha acima serve para criar as tabelas no banco de dados de forma a sincronizar com o relacionamento escrito
+// depois que a tabela for criada uma vez, o código deve ser removido
+
+
 module.exports = Category;
