@@ -4,7 +4,7 @@
     <div class="container">
         <hr>
         <h2>Artigos</h2>
-        <a class="btn btn-success" href="/admin/articles/new">Criar novo artico</a>
+        <a class="btn btn-success" href="/admin/articles/new">Criar novo artigo</a>
         <hr>
         <table class="table table-bordered">
             <thead>
@@ -16,13 +16,20 @@
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody>  
                 <% articles.forEach(article => { %>
+                <tr>
                     <td><%= article.id %></td>
                     <td><%= article.title %></td>
                     <td><%= article.slug %></td>
                     <td><%= article.category.title %></td>
-                    <th>Ações</th>
+                    <td>
+                        <form method="post" action="/articles/delete" style="display: inline;" onsubmit="confirmDelete(event, this)">
+                            <input type="hidden" name="id" value="<%= article.id %>">
+                            <button class="btn btn-danger">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
                 <% }); %>
             </tbody>
         </table>
@@ -33,7 +40,7 @@
     function confirmDelete(event, form) {
         event.preventDefault();
         console.log('O formulário não foi enviado');
-        const decision = confirm('Você quer mesmo deletar essa categoria?');
+        const decision = confirm('Você quer mesmo deletar esse artigo?');
         if(decision) {
             form.submit();
         }
