@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router(); //utiliza-se o router pois não estamos no arquivo principal (index.js)
-const Category = require('../categories/Category')
+const Category = require('../categories/Category');
+const Article = require('./Article');
+const slugify = require('slugify');
 
-router.get('/articles', (req, res) => {
+router.get('/admin/articles', (req, res) => {
   res.send('Rota de artigos');
 });
 
@@ -10,6 +12,21 @@ router.get('/admin/articles/new', (req, res) => {
   Category.findAll().then(categories => {
     res.render('admin/articles/new', {categories});
   })
+});
+
+router.post('/articles/save', (req, res) => {
+  const title = req.body.title;
+  const body = req.body.body;
+  const category = req.body.category;
+
+  Article.create({
+    title,
+    slug: slugify(title),
+    body,
+    categoryId: category
+  }).then(() => {
+    res.redirect('/admin/articles');
+  });
 });
 
 module.exports = router;
