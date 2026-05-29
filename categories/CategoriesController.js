@@ -10,7 +10,7 @@ router.get('/admin/categories/new', (req, res) => {
 router.post('/categories/save', (req, res) => {
   const title = req.body.title;
 
-  if (title != undefined) {
+  if(title != undefined) {
     Category.create({
       title,
       slug: slugify(title)
@@ -27,6 +27,26 @@ router.get('/admin/categories', (req, res) => {
   Category.findAll().then(categories => {
     res.render('admin/categories', {categories: categories});
   });
+});
+
+router.post('/categories/delete', (req, res) => {
+  const id = req.body.id
+  if(id != undefined) {
+    if(!isNaN(id)) { 
+      Category.destroy({
+        where: {
+          id
+        }
+      }).then(() => {
+        res.redirect('/admin/categories');
+      });
+
+    } else { // não for um número
+      res.redirect('/admin/categories');
+    }
+  } else { // null
+    res.redirect('/admin/categories');
+  }
 });
 
 module.exports = router;
