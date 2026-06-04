@@ -33,6 +33,36 @@ router.post('/articles/save', (req, res) => {
   });
 });
 
+router.get('/admin/articles/edit/:id', (req, res) => {
+  const id = req.params.id;
+
+  if(isNaN(id)) {
+    res.redirect('/admin/articles');
+  }
+
+  Article.findByPk(id).then(article => {
+    if(article.id != undefined) {
+      res.render('admin/articles/edit', {article});
+    } else {
+      res.redirect('/admin/articles');
+    }
+  }).catch(error => {
+    res.redirect('/admin/articles');
+  });
+});
+
+router.post('/articles/update', (req, res) => {
+  const id = req.body.id;
+  const title = req.body.title;
+  const body = req.body.body;
+
+  Article.update({title, slug: slugify(title), body}, {
+    where: {id}
+  }).then(() => {
+    res.redirect('/admin/articles')
+  });
+});
+
 router.post('/articles/delete', (req, res) => {
   const id = req.body.id
   if(id != undefined) {
