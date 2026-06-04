@@ -52,7 +52,7 @@ app.get('/:slug', (req, res) => {
   }).then(article => {
     if(article != undefined) {
       Category.findAll().then(categories => {
-        res.render('articles', {articles, categories});
+        res.render('article', {article, categories});
       });
     } else {
       res.redirect('/');
