@@ -42,7 +42,9 @@ router.get('/admin/articles/edit/:id', (req, res) => {
 
   Article.findByPk(id).then(article => {
     if(article.id != undefined) {
-      res.render('admin/articles/edit', {article});
+      Category.findAll().then(categories => {
+        res.render('admin/articles/edit', {article, categories});
+      });
     } else {
       res.redirect('/admin/articles');
     }
@@ -68,9 +70,7 @@ router.post('/articles/delete', (req, res) => {
   if(id != undefined) {
     if(!isNaN(id)) { 
       Article.destroy({
-        where: {
-          id
-        }
+        where: {id}
       }).then(() => {
         res.redirect('/admin/articles');
       });
