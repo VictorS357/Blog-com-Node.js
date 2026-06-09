@@ -17,16 +17,22 @@ router.post('/users/create', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(password, salt);
+    User.findOne({where: {email}}).then(user => {
+        if(user == undefined) {
+            const salt = bcrypt.genSaltSync(10);
+            const hash = bcrypt.hashSync(password, salt);
 
-    User.create({
-        email,
-        password: hash
-    }).then(() => {
-        res.redirect('/');
-    }).catch(error => {
-        res.redirect('/');
+            User.create({
+                email,
+                password: hash
+            }).then(() => {
+                res.redirect('/');
+            }).catch(error => {
+                res.redirect('/');
+            });
+        } else {
+            res.redirect('/admin/users/create');
+        }
     });
 });
 
