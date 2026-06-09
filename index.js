@@ -5,9 +5,11 @@ const connection = require('./database/database');
 
 const categoriesController = require('./categories/CategoriesController');
 const articlesController = require('./articles/ArticlesController');
+const usersController = require('./users/UsersController');
 
 const Category = require('./categories/Category');
 const Article = require('./articles/Article');
+const User = require('./users/User')
 
 //view engine
 app.set('view engine', 'ejs');
@@ -31,6 +33,7 @@ connection
 //rotas controller
 app.use('/', categoriesController); //utilizar rotas dentro do arquivo --- esse '/' é um prefixo (nesse caso sem prefixo) --- caso tivesse prefixo, ele seria usado sempre antes da rota princpal
 app.use('/', articlesController);
+app.use('/', usersController);
 
 //rotas
 app.get('/', (req, res) => {
