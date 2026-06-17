@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 
 //sessions
 app.use(session({
-  secret: "aksndjakndkjankdssankja", cookie: {maxAge: 30000} //secret é como se fosse uma senha para decriptar suas sessões
+  secret: "aksndjakndkjankdssankja", cookie: {maxAge: 300000000} //secret é como se fosse uma senha para decriptar suas sessões
 }))
 //o express-sessions guarda as informações das sessões no storage do servidor (utiliza memória ram do computador)
 //em sistemas de médio a grande porte, não é recomendado utilizar esse sistema de armazenamento
