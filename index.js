@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const connection = require('./database/database');
 
 const categoriesController = require('./categories/CategoriesController');
@@ -13,6 +14,11 @@ const User = require('./users/User')
 
 //view engine
 app.set('view engine', 'ejs');
+
+//sessions
+app.use(session({
+  secret: "aksndjakndkjankdssankja", cookie: {maxAge: 30000} //secret é como se fosse uma senha para decriptar suas sessões
+}))
 
 //static
 app.use(express.static('public'));
